@@ -64,10 +64,10 @@ PostGISSource.prototype = {
       else {
         query = "SELECT ST_AsGeoJson("+this._geomField+") as geometry,* FROM "+this._tableName+" WHERE "+this._geomField+" && ST_MakeEnvelope($1,$2,$3,$4,"+this._projectionRaw+");";
       }
-      // console.log("Querying... "+query+" "+min+", "+max);
+      console.log("Querying... "+query+" "+min+", "+max);
       client.query(query, [min[0], min[1], max[0], max[1]], function(err, result) {
         if (err) { return callback(err, null); }
-        // console.log("Loaded in " + (Date.now() - start) + "ms");
+        console.log("Loaded in " + (Date.now() - start) + "ms");
         
         var geoJson;
 
@@ -76,10 +76,10 @@ PostGISSource.prototype = {
           try {
             geoJson = this._toGeoJson(result.rows);
             if (this._projection !== mapProjection){
-              //console.log("REPROJECTING GEOMETRY");
-              //console.log('before',geoJson.features[0].geometry.coordinates[0][0][0]);
+              console.log("REPROJECTING GEOMETRY");
+              console.log('before',geoJson.features[0].geometry.coordinates[0][0][0]);
               geoJson = projector.project.FeatureCollection(this._projection, mapProjection, geoJson);
-              //console.log('after',geoJson.features[0].geometry.coordinates[0][0][0]);
+              console.log('after',geoJson.features[0].geometry.coordinates[0][0][0]);
             }
           }
           catch(err) {
