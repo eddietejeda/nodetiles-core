@@ -58,12 +58,13 @@ PostGISSource.prototype = {
       // console.log("Loading features...");
       var start, query;
       start = Date.now();
+
+      attrFields = "* ";
       if (this._attrFields) {
-        query = "SELECT ST_AsGeoJson("+this._geomField+") as geometry, "+this._attrFields+" FROM "+this._tableName+" WHERE "+this._geomField+" && ST_MakeEnvelope($1,$2,$3,$4,"+this._projectionRaw+");";
+        attrFields = this._attrFields;
       }
-      else {
-        query = "SELECT ST_AsGeoJson("+this._geomField+") as geometry,* FROM "+this._tableName+" WHERE "+this._geomField+" && ST_MakeEnvelope($1,$2,$3,$4,"+this._projectionRaw+");";
-      }
+      query = "SELECT ST_AsGeoJson("+this._geomField+") as geometry,"+attrFields+" FROM "+this._tableName+" WHERE "+this._geomField+" && ST_MakeEnvelope($1,$2,$3,$4,"+this._projectionRaw+");";
+
       console.log("Querying... "+query+" "+min+", "+max);
       client.query(query, [min[0], min[1], max[0], max[1]], function(err, result) {
         if (err) { return callback(err, null); }
