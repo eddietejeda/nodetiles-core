@@ -20,7 +20,7 @@
   "main": "./index",
   "repository": {
     "type": "git",
-    "url": "https://github.com/codeforamerica/nodetiles.git"
+    "url": "https://github.com/eddietejeda/nodetiles-core.git"
   },
   "engines": {
     "node": ">0.6.x",
@@ -47,5 +47,5 @@
   "dist": {
     "shasum": "c1f4ef670fdaec57623b7ec1b24454441ef63180"
   },
-  "_from": "nodetiles-core@https://github.com/eddietejeda/nodetiles-core/tarball/debugging"
+  "_from": "nodetiles-core@https://github.com/eddietejeda/nodetiles-core/tarball/master"
 }
