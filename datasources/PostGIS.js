@@ -70,7 +70,7 @@ PostGISSource.prototype = {
       requestParams = this._requestParams;
       var requiredConditions = [];
 
-      requiredConditions.push(" ST_MakeEnvelope($1,$2,$3,$4,"+this._projectionRaw+") ");
+      requiredConditions.push(" ST_MakeEnvelope($1,$2,$3,$4, -1) ");
 
       if (request.query && requestParams) {
                 
